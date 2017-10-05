@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 
-import userReducer from './user/userReducer';
+import addressReducer from './AddressApp/AddressReducer';
 
 const rootReducer = combineReducers({
-    user: userReducer,
+    address: addressReducer,
     form: formReducer
 });
 

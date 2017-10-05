@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import promise from 'redux-promise';
-import reducer from '../app/appReducer';
+import reducer from '../app/AppReducer';
 
 export default function configureStore(initialState) {
     const finalCreateStore = compose(
@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
 
     if (module.hot) {
         module.hot.accept('../app/appReducer', () => {
-            const nextReducer = require('../app/appReducer');
+            const nextReducer = require('../app/AppReducer');
             store.replaceReducer(nextReducer);
         });
     }

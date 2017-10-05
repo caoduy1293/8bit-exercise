@@ -44,6 +44,7 @@
     "ejs": "^2.5.3",
     "express": "^4.16.1",
     "express-jwt": "^5.1.0",
+    "firebase": "^4.5.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.17.2",
