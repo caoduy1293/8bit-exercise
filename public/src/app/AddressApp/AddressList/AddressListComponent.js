@@ -3,13 +3,14 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import * as utility from '../../../ultility';
 
 class AddressListComponent extends Component{
     static contextTypes = {
         router: PropTypes.object
     };
     componentWillMount(){
-        this.props.fetchAddress();
+        this.props.fetchAddresses();
     }
 
     renderAddressItem(addressList){

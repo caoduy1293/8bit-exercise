@@ -7,7 +7,7 @@ import AddressListContainer from './AddressListContainer';
 class AddressListPage extends Component {
     render(){
         return (
-            <div>
+            <div className={'container'}>
                 <AddressListContainer />
             </div>
         );

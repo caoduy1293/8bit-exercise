@@ -9,4 +9,4 @@ const DB_config = {
 };
 firebase.initializeApp(DB_config);
 
-export const database = firebase.database().ref('addressList/')
+export const database = firebase.database()
