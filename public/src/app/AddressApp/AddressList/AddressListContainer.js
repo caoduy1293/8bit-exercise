@@ -10,9 +10,14 @@ import AddressListComponent from './AddressListComponent';
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchAddresses: () => {
-            dispatch(addressAction.fetchAddresses()).payload.on('value', (snapshot) => {
+            dispatch(addressAction.fetchAddresses()).payload.once('value').then((snapshot) => {
                 dispatch(addressAction.fetchAddressesSuccess(snapshot.val()));
-            })
+            });
+        },
+        deleteAddress: (idAddress)=>{
+            dispatch(addressAction.deleteAddress()).payload.child(idAddress).remove().then(()=>{
+                dispatch(addressAction.deleteAddressSuccess(idAddress));
+            });
         }
     };
 };

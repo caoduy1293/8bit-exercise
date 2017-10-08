@@ -1,3 +1,8 @@
+export const appRoute = {
+    root: '',
+    addressPage: 'address/'
+};
+
 export function convertObjToArray(obj) {
     let copyObj = Object.assign({}, obj);
     let arrayTemp = [];
@@ -19,4 +24,18 @@ export function convertArrayToObj(array) {
         objTemp[id] = objItem;
     }
     return objTemp;
+}
+
+export function removeOutArrayById(id, array) {
+    let arrayTemp = _.cloneDeep(array);
+    let index = -1;
+    for (let i = 0; i< arrayTemp.length; i++){
+        if(arrayTemp[i].id === id){
+            index = i;
+        }
+    }
+    if (index > -1) {
+        arrayTemp.splice(index, 1);
+    }
+    return arrayTemp;
 }

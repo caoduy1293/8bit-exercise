@@ -1,11 +1,12 @@
+import _ from 'lodash';
+
 import * as addressActionType from './AddressActionType';
-import * as addressAction from './AddressAction';
+import { removeOutArrayById } from '../../ultility';
 
 const INITIAL_STATE = {
     addressesList: {addresses: [], error:null, loading: false},
     newAddress:{address:null, error: null, loading: false},
-    activeAddress:{address:null, error:null, loading: false},
-    deletedAddress: {address: null, error:null, loading: false}
+    activeAddress:{address:null, error:null, loading: false}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -61,6 +62,34 @@ export default (state = INITIAL_STATE, action) => {
                     error: error,
                     loading: false
                 }
+            };
+        }
+        // for delete address
+        case addressActionType.DELETE_ADDRESS:{
+            let addressList = _.cloneDeep(state.addressesList.addresses);
+            return {...state, addressesList: {
+                addresses:addressList,
+                error: null,
+                loading: true
+            }
+            };
+        }
+        case addressActionType.DELETE_ADDRESS_SUCCESS:{
+            let idAddress = action.payload;
+            return {...state, addressesList: {
+                addresses: removeOutArrayById(idAddress, state.addressesList.addresses),
+                error: null,
+                loading: false
+            }
+            };
+        }
+        case addressActionType.DELETE_ADDRESS_FAILURE:{
+            error = action.payload;
+            return {...state, addressesList: {
+                addresses:null,
+                error: error,
+                loading: false
+            }
             };
         }
         default:

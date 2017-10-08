@@ -30,3 +30,17 @@ export function fetchAddressSuccess(address) {
         payload: address
     };
 }
+
+export function deleteAddress() {
+    return {
+        type: addressActionType.DELETE_ADDRESS,
+        payload: database.ref('addressList/')
+    };
+}
+
+export function deleteAddressSuccess(idAddress) {
+    return {
+        type: addressActionType.DELETE_ADDRESS_SUCCESS,
+        payload: idAddress
+    };
+}

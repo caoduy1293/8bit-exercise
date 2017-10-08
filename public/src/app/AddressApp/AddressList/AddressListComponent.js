@@ -3,7 +3,24 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+
 import * as utility from '../../../ultility';
+import TableComponent from '../../../common/table/TableComponent';
+import {deleteAddress, deleteAddressSuccess} from '../AddressAction';
+
+function convertAddressArray(addresses) {
+    let addressList = [];
+    for(let i = 0; i < addresses.length; i++){
+        let objTemp = {};
+        objTemp['id'] = addresses[i].id;
+        objTemp['street'] = addresses[i].street;
+        objTemp['ward'] = addresses[i].ward;
+        objTemp['district'] = addresses[i].district;
+        objTemp['city'] = addresses[i].city;
+        addressList.push(objTemp);
+    }
+    return addressList;
+}
 
 class AddressListComponent extends Component{
     static contextTypes = {
@@ -13,19 +30,7 @@ class AddressListComponent extends Component{
         this.props.fetchAddresses();
     }
 
-    renderAddressItem(addressList){
-        return addressList.map((address) => {
-            return (
-            <li className="list-group-item" key={address.id}>
-                <Link style={{color:'black'}} to={"address/" + address.id}>
-                    <h3 className="list-group-item-heading">{address.city}</h3>
-                </Link>
-            </li>
-            );
-        });
-    }
-
-    renderAddressList(addresses, loading, error){
+    renderAddressList(tableConfig, loading, error){
         if(loading){
             return (
                 <div><p>loading...</p></div>
@@ -36,21 +41,30 @@ class AddressListComponent extends Component{
             );
         }else{
             return (
-                <div>
-                    <ul className="list-group">
-                        {this.renderAddressItem(addresses)}
-                    </ul>
-                </div>
+                <TableComponent tableConfig={tableConfig} />
             );
         }
     }
 
     render(){
         const { addresses, loading, error } = this.props.addressList;
+        let tableConfig = {
+            title: 'Address List',
+            headerTable:['Street', 'Ward', 'District', 'City'],
+            bodyTable: convertAddressArray(addresses),
+            operation: {
+                enable: true,
+                editCallback: (idAddress) => {
+                    this.context.router.push(utility.appRoute.addressPage + idAddress);
+                },
+                removeCallback: (idAddress) => {
+                    this.props.deleteAddress(idAddress);
+                }
+            }
+        };
         return (
             <div>
-                <h1>Address List</h1>
-                {this.renderAddressList(addresses, loading, error)}
+                {this.renderAddressList(tableConfig, loading, error)}
             </div>
         )
     }
