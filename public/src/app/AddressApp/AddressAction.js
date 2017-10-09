@@ -1,7 +1,8 @@
 import * as addressActionType from './AddressActionType';
 import { database } from '../../config/config';
-import * as utility from '../../ultility';
+import {convertObjToArray} from '../../ultility';
 
+//FETCH LIST ADDRESS
 export function fetchAddresses() {
     return {
         type: addressActionType.FETCH_ADDRESSES,
@@ -10,13 +11,13 @@ export function fetchAddresses() {
 }
 
 export function fetchAddressesSuccess( addressList ) {
-    let addressArray = utility.convertObjToArray(addressList);
+    let addressArray = convertObjToArray(addressList);
     return {
         type: addressActionType.FETCH_ADDRESSES_SUCCESS,
         payload: addressArray
     };
 }
-
+//FETCH A ADDRESS
 export function fetchAddress(id) {
     return {
         type: addressActionType.FETCH_ADDRESS,
@@ -30,7 +31,7 @@ export function fetchAddressSuccess(address) {
         payload: address
     };
 }
-
+//DELETE A ADDRESS
 export function deleteAddress() {
     return {
         type: addressActionType.DELETE_ADDRESS,
@@ -43,4 +44,24 @@ export function deleteAddressSuccess(idAddress) {
         type: addressActionType.DELETE_ADDRESS_SUCCESS,
         payload: idAddress
     };
+}
+//CREATE NEW ADDRESS
+export function createAddress() {
+
+    return {
+        type: addressActionType.CREATE_ADDRESS,
+        payload: database.ref('addressList/')
+    };
+}
+
+export function createAddressSuccess() {
+    return {
+        type: addressActionType.CREATE_ADDRESS_SUCCESS
+    };
+}
+
+export function resetNewAddress() {
+    return {
+        type: addressActionType.RESET_NEW_ADDRESS
+    }
 }

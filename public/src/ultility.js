@@ -1,6 +1,10 @@
+import _ from 'lodash';
+
 export const appRoute = {
     root: '',
-    addressPage: 'address/'
+    addressPage: 'address/',
+    addressEdit: 'address/edit/',
+    addressNew: 'address/new'
 };
 
 export function convertObjToArray(obj) {

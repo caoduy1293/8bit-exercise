@@ -24,6 +24,16 @@ export default class TableComponent extends Component{
             );
         }
     }
+    renderTitleTable(tableConfig){
+        return (
+            <div style={{position:'relative'}}>
+                <h2>{tableConfig.title}</h2>
+                <button style={{position:'absolute',top: 0,right: 0}} type="button" className={"btn btn-info"} onClick={() => tableConfig.addCallback()}>
+                    Add
+                </button>
+            </div>
+        );
+    }
     renderHeaderTable(arrayHeader, operation ){
         if(operation.enable){
             arrayHeader.push('Operation');
@@ -75,7 +85,7 @@ export default class TableComponent extends Component{
     render(){
         return (
             <div>
-                <h2>{this.props.tableConfig.title}</h2>
+                {this.renderTitleTable(this.props.tableConfig)}
                 {this.renderTable()}
             </div>
         );

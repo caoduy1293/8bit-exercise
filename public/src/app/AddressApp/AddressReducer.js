@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     let error;
     switch (action.type) {
-        // for addresses
+        // for fetch addresses
         case addressActionType.FETCH_ADDRESSES:{
             return {...state, addressesList: {
                     addresses: [],
@@ -38,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
         }
-        // for address
+        // for fetch a address
         case addressActionType.FETCH_ADDRESS:{
             return {...state, activeAddress: {
                     address:null,
@@ -88,6 +88,23 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, addressesList: {
                 addresses:null,
                 error: error,
+                loading: false
+            }
+            };
+        }
+        // for add a address
+        case addressActionType.CREATE_ADDRESS:{
+            return {...state, newAddress: {
+                address:null,
+                error: null,
+                loading: true
+            }
+            };
+        }
+        case addressActionType.RESET_NEW_ADDRESS:{
+            return {...state, newAddress: {
+                address:null,
+                error: null,
                 loading: false
             }
             };

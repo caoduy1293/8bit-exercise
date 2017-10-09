@@ -1,9 +1,9 @@
 /**
  * Created by caoquang on 07/10/2017.
  */
+import React from 'react';
 const renderField = ({ input, label, type, meta: { touched, error, invalid, warning } }) => (
     <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>
-        <label  className="control-label">{label}</label>
         <div>
             <input {...input} className="form-control"  placeholder={label} type={type}/>
             <div className="help-block">
