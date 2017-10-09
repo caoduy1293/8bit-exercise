@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import {CSVLink, CSVDownload} from 'react-csv';
+import CSSModules from 'react-css-modules';
 
-export default class TableComponent extends Component{
+import styles from './TableComponent.css';
+
+class TableComponent extends Component{
     renderTable(){
         if(this.props.tableConfig.bodyTable.length === 0){
             return (
@@ -25,12 +29,29 @@ export default class TableComponent extends Component{
         }
     }
     renderTitleTable(tableConfig){
+        let csvData = [];
+        let csvHeader = tableConfig.headerTable.slice();
+        csvData.push(csvHeader);
+        for(let i = 0; i<tableConfig.bodyTable.length; i++){
+            let itemTemp = Object.values(tableConfig.bodyTable[i]);
+            itemTemp.shift();
+            csvData.push(itemTemp);
+        }
         return (
-            <div style={{position:'relative'}}>
+            <div styleName='header-table'>
                 <h2>{tableConfig.title}</h2>
-                <button style={{position:'absolute',top: 0,right: 0}} type="button" className={"btn btn-info"} onClick={() => tableConfig.addCallback()}>
-                    Add
-                </button>
+                <div styleName='header-button'>
+                    <button type="button" className={"btn btn-info"} onClick={() => tableConfig.addCallback()}>
+                        Add
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                    <CSVLink data={csvData}
+                             filename={"listAddress.csv"}
+                             className="btn btn-info"
+                             target="_blank">
+                        Export CSV
+                    </CSVLink>
+                </div>
             </div>
         );
     }
@@ -91,3 +112,5 @@ export default class TableComponent extends Component{
         );
     }
 }
+
+export default CSSModules(TableComponent, styles);

@@ -1,6 +1,13 @@
 var webpack = require('webpack');
 var CompressionPlugin = require('compression-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var combineLoaders = require('webpack-combine-loaders');
+var WebpackMd5Hash = require('webpack-md5-hash');
 
+var GLOBALS = {
+  'process.env.NODE_ENV': JSON.stringify('production'),
+  __DEV__: false
+};
 
 module.exports = {
   entry: [
@@ -14,16 +21,26 @@ module.exports = {
   devtool: "eval",
   module: {
     loaders: [{
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel'
+    },{
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract(
+          combineLoaders([{
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          }])
+      )
     }]
   },
   plugins: [
-    new webpack.DefinePlugin({ //<--key to reduce React's size
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
+    new WebpackMd5Hash(),
+    new webpack.DefinePlugin(GLOBALS),
+    new ExtractTextPlugin('style/style.css'),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),

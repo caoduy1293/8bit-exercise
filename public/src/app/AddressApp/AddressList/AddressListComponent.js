@@ -12,9 +12,9 @@ function convertAddressArray(addresses) {
         let objTemp = {};
         objTemp['id'] = addresses[i].id;
         objTemp['street'] = addresses[i].street;
-        objTemp['ward'] = addresses[i].ward;
-        objTemp['district'] = addresses[i].district;
-        objTemp['city'] = addresses[i].city;
+        objTemp['ward'] = addresses[i].ward || '';
+        objTemp['district'] = addresses[i].district || '';
+        objTemp['city'] = addresses[i].city || '';
         addressList.push(objTemp);
     }
     return addressList;
