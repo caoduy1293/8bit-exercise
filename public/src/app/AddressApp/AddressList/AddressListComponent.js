@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 
-import {appRoute} from '../../../ultility';
+import {appRoute} from '../../../utils';
 import TableComponent from '../../../common/table/TableComponent';
 
 function convertAddressArray(addresses) {

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import * as addressActionType from './AddressActionType';
-import { removeOutArrayById } from '../../ultility';
+import { removeOutArrayById } from '../../utils';
 
 const INITIAL_STATE = {
     addressesList: {addresses: [], error:null, loading: false},

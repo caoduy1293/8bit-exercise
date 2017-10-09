@@ -2,15 +2,28 @@
  * Created by caoquang on 06/10/2017.
  */
 import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
+import { connect } from 'react-redux';
+import { initialize } from 'redux-form';
 
-export default class AddressDetailComponent extends Component {
+import AddressForm from '../AddressForm';
+
+class AddressDetailComponent extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
 
     componentWillMount() {
         this.props.fetchAddress(this.props.addressId);
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeAddress.address) {
+            this.props.dispatch(initialize('addressFrom', {
+                street: nextProps.activeAddress.address.street,
+                ward: nextProps.activeAddress.address.ward,
+                district: nextProps.activeAddress.address.district,
+                city: nextProps.activeAddress.address.city,
+            }, ['street', 'ward', 'district', 'city']));
+        }
     }
 
     renderAddress(addressObj, loading, error) {
@@ -29,7 +42,7 @@ export default class AddressDetailComponent extends Component {
         } else if (addressObj !== null) {
             return (
                 <div>
-                    {addressObj.city}
+                    <AddressForm onSubmit={this.handleSubmit.bind(this)}/>
                 </div>
             )
         } else {
@@ -41,7 +54,13 @@ export default class AddressDetailComponent extends Component {
         }
 
     }
-
+    handleSubmit(data) {
+        console.log(snapshot);
+        // return this.props.dispatch(createAddress()).payload.push(data).then((snapshot)=>{
+        //
+        //     this.props.dispatch(initialize('addressFrom', {}));
+        // });
+    }
     render() {
         const {address, loading, error} = this.props.activeAddress;
         return (
@@ -51,3 +70,5 @@ export default class AddressDetailComponent extends Component {
         )
     }
 }
+
+export default connect()(AddressDetailComponent)

@@ -1,6 +1,6 @@
 import * as addressActionType from './AddressActionType';
 import { database } from '../../config/config';
-import {convertObjToArray} from '../../ultility';
+import {convertObjToArray} from '../../utils';
 
 //FETCH LIST ADDRESS
 export function fetchAddresses() {

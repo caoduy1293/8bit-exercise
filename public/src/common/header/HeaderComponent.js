@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 
-import {appRoute} from '../../ultility';
+import {appRoute} from '../../utils';
 
 class HeaderComponent extends Component{
     static contextTypes = {

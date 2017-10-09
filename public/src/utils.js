@@ -43,3 +43,24 @@ export function removeOutArrayById(id, array) {
     }
     return arrayTemp;
 }
+
+export function validateAddress(values) {
+    const errors = {};
+    if (!values.street || values.street.trim() === '') {
+        errors.street = 'Enter a Street';
+    }
+    if (!values.city || values.city.trim() === '') {
+        if (!values.ward || values.ward.trim() === '') {
+            errors.ward = 'Enter ward';
+        }
+        if (!values.district || values.district.trim() === '') {
+            errors.district = 'Enter district';
+        }
+    }
+    if( (!values.ward || values.ward.trim() === '') && (!values.district || values.district.trim() === '') ){
+        if (!values.city || values.city.trim() === '') {
+            errors.city = 'Enter city';
+        }
+    }
+    return errors;
+}

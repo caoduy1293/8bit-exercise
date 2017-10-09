@@ -5,7 +5,7 @@ import App from './app/App';
 import AddressListPage from './app/AddressApp/AddressList/AddressListPage';
 import AddressDetailPage from './app/AddressApp/AdressDetail/AddressDetailPage';
 import NewAddressPage from './app/AddressApp/NewAddress/NewAddressPage';
-import {appRoute} from './ultility';
+import {appRoute} from './utils';
 
 export default (
     <Route path="/" component={App}>

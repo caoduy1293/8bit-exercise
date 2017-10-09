@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import AddressDetailContainer from './AddressDetailContainer';
+import HeaderComponent from '../../../common/header/HeaderComponent';
 
 class AddressDetailPage extends Component{
     static contextTypes = {
@@ -11,8 +12,11 @@ class AddressDetailPage extends Component{
     };
     render(){
         return (
-            <div className='container'>
-                <AddressDetailContainer id={this.props.params.id}/>
+            <div >
+                <HeaderComponent />
+                <div className='container'>
+                    <AddressDetailContainer id={this.props.params.id}/>
+                </div>
             </div>
         )
     }

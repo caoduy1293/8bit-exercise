@@ -2,42 +2,11 @@
  * Created by caoquang on 08/10/2017.
  */
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { connect } from 'react-redux';
+import { initialize } from 'redux-form';
 
-import renderField from '../../../common/renderField/renderField';
 import { createAddress, createAddressSuccess } from '../AddressAction';
-
-//Client side validation
-function validate(values) {
-    const errors = {};
-    if (!values.street || values.street.trim() === '') {
-        errors.street = 'Enter a Street';
-    }
-    if (!values.city || values.city.trim() === '') {
-        if (!values.ward || values.ward.trim() === '') {
-            errors.ward = 'Enter ward';
-        }
-        if (!values.district || values.district.trim() === '') {
-            errors.district = 'Enter district';
-        }
-    }
-    if( (!values.ward || values.ward.trim() === '') && (!values.district || values.district.trim() === '') ){
-        if (!values.city || values.city.trim() === '') {
-            errors.city = 'Enter city';
-        }
-    }
-    return errors;
-}
-
-//For any field errors upon submission (i.e. not instant check)
-const validateAndCreateAddress = (values, dispatch) => {
-    return dispatch(createAddress()).payload.push(values).then((snapshot)=>{
-        console.log(snapshot);
-    });
-}
-
-
+import AddressForm from '../AddressForm';
 
 class NewAddressComponent extends Component {
     static contextTypes = {
@@ -67,52 +36,22 @@ class NewAddressComponent extends Component {
             return <span></span>
         }
     }
+    handleSubmit(data) {
+        return this.props.dispatch(createAddress()).payload.push(data).then((snapshot)=>{
+            console.log(snapshot);
+            this.props.dispatch(initialize('addressFrom', {}));
+        });
+    }
     render() {
-        const {handleSubmit, submitting, newAddress} = this.props;
+        const {newAddress} = this.props;
         return (
-            <div className='container'>
+            <div>
                 { this.renderError(newAddress) }
-                <form onSubmit={ handleSubmit(validateAndCreateAddress) }>
-                    <Field
-                        name="street"
-                        type="text"
-                        component={ renderField }
-                        label="Street*" />
-                    <Field
-                        name="ward"
-                        type="text"
-                        component={ renderField }
-                        label="Ward" />
-                    <Field
-                        name="district"
-                        type="text"
-                        component={ renderField }
-                        label="District" />
-                    <Field
-                        name="city"
-                        type="text"
-                        component={ renderField }
-                        label="City" />
-                    <div>
-                        <button
-                            type="submit"
-                            className="btn btn-primary"
-                            disabled={ submitting }>
-                            Add
-                        </button>
-                        <Link
-                            to="/"
-                            className="btn btn-error"> Cancel
-                        </Link>
-                    </div>
-                </form>
+                <AddressForm onSubmit={this.handleSubmit.bind(this)}/>
             </div>
         )
     }
 }
 
 
-export default reduxForm({
-    form: 'NewAddressComponent', // a unique identifier for this form
-    validate // <--- validation function given to redux-form
-})(NewAddressComponent)
+export default connect()(NewAddressComponent)
