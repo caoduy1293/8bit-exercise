@@ -2,20 +2,22 @@
  * Created by caoquang on 10/10/2017.
  */
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError, change as changeFieldValue } from 'redux-form';
 import { Link } from 'react-router';
 
 import { validateAddress } from '../../utils';
 import renderField from '../../common/renderField/renderField';
+import MyFancyComponent from '../../common/googleMap/SearchBoxGoogle';
 
 class AddressForm extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
     render() {
-        const { handleSubmit, submitting } = this.props;
+        const { handleSubmit, submitting, onPlacesChangedFn } = this.props;
         return (
             <form onSubmit={ handleSubmit }>
+                <MyFancyComponent onPlacesChanged={onPlacesChangedFn}/>
                 <Field
                     name="street"
                     type="text"
@@ -41,7 +43,7 @@ class AddressForm extends Component {
                         type="submit"
                         className="btn btn-primary"
                         disabled={ submitting }>
-                        Add
+                        Submit
                     </button>
                     <Link
                         to="/"

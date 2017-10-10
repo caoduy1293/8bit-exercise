@@ -65,3 +65,25 @@ export function resetNewAddress() {
         type: addressActionType.RESET_NEW_ADDRESS
     }
 }
+
+//CREATE NEW ADDRESS
+export function upAddress(id) {
+
+    return {
+        type: addressActionType.UPDATE_ADDRESS,
+        payload: database.ref('addressList/').child(id)
+
+    };
+}
+
+export function upAddressSuccess() {
+    return {
+        type: addressActionType.UPDATE_ADDRESS_SUCCESS
+    };
+}
+
+export function resetUpAddress() {
+    return {
+        type: addressActionType.RESET_UPDATE_ADDRESS
+    }
+}

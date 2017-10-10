@@ -109,6 +109,24 @@ export default (state = INITIAL_STATE, action) => {
             }
             };
         }
+        // for update a address
+        case addressActionType.UPDATE_ADDRESS:{
+            return {...state, activeAddress: {
+                address:null,
+                error: null,
+                loading: true
+            }
+            };
+        }
+        case addressActionType.RESET_NEW_ADDRESS:{
+            return {...state, activeAddress: {
+                address:null,
+                error: null,
+                loading: false
+            }
+            };
+        }
+
         default:
             return state;
     }
