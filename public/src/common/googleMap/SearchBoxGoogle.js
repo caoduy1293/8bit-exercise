@@ -24,6 +24,7 @@ const PlacesWithStandaloneSearchBox = compose(
             onPlacesChanged={props.onPlacesChanged}
         >
             <input
+                ref={props.inputRef}
                 type="text"
                 placeholder="choose your address"
                 style={{
@@ -67,7 +68,7 @@ class MyFancyComponent extends Component {
 
     render() {
         return (
-            <PlacesWithStandaloneSearchBox {...this.state} />
+            <PlacesWithStandaloneSearchBox {...this.state} inputRef={this.props.inputRef}/>
         )
     }
 }

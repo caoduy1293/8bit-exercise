@@ -17,9 +17,9 @@ class AddressDetailComponent extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
-
-    componentWillMount() {
-        this.props.fetchAddress(this.props.addressId);
+    inputElement = null;
+    componentDidMount(){
+        console.log(this.inputElement);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.activeAddress.address) {
@@ -48,7 +48,7 @@ class AddressDetailComponent extends Component {
         } else if (addressObj !== null) {
             return (
                 <div>
-                    <AddressForm onSubmit={this.handleSubmit} onPlacesChangedFn={this.handlePlacesChanged}/>
+                    <AddressForm onSubmit={this.handleSubmit} onPlacesChangedFn={this.handlePlacesChanged} inputRef={el => this.inputElement = el}/>
                 </div>
             )
         } else {
@@ -64,11 +64,8 @@ class AddressDetailComponent extends Component {
         return this.props.dispatch(upAddress(this.props.addressId)).payload.update(data).then((snapshot)=>{
             this.props.dispatch(initialize('addressFrom', {}));
             this.context.router.push('/');
+            this.inputElement.value = '';
         });
-        // return this.props.dispatch(createAddress()).payload.push(data).then((snapshot)=>{
-        //
-        //     this.props.dispatch(initialize('addressFrom', {}));
-        // });
     }
     handlePlacesChanged(data) {
         let componentForm = {

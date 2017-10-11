@@ -17,7 +17,7 @@ class NewAddressComponent extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
-
+    inputElement = null;
     componentWillMount() {
         this.props.dispatch(initialize('addressFrom', {}));
         //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
@@ -45,6 +45,7 @@ class NewAddressComponent extends Component {
     handleSubmit(data) {
         return this.props.dispatch(createAddress()).payload.push(data).then((snapshot)=>{
             this.context.router.push('/');
+            this.inputElement.value = '';
         });
     }
     handlePlacesChanged(data) {
@@ -89,7 +90,7 @@ class NewAddressComponent extends Component {
         return (
             <div>
                 { this.renderError(newAddress) }
-                <AddressForm onSubmit={this.handleSubmit} onPlacesChangedFn={this.handlePlacesChanged}/>
+                <AddressForm onSubmit={this.handleSubmit} onPlacesChangedFn={this.handlePlacesChanged} inputRef={el => this.inputElement = el}/>
             </div>
         )
     }

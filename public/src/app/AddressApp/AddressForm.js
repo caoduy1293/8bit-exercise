@@ -14,10 +14,10 @@ class AddressForm extends Component {
         router: PropTypes.object
     };
     render() {
-        const { handleSubmit, submitting, onPlacesChangedFn } = this.props;
+        const { handleSubmit, submitting, onPlacesChangedFn, inputRef } = this.props;
         return (
             <form onSubmit={ handleSubmit }>
-                <MyFancyComponent onPlacesChanged={onPlacesChangedFn}/>
+                <MyFancyComponent onPlacesChanged={onPlacesChangedFn} inputRef={inputRef}/>
                 <Field
                     name="street"
                     type="text"
