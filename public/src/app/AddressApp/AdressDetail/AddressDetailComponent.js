@@ -18,8 +18,9 @@ class AddressDetailComponent extends Component {
         router: PropTypes.object
     };
     inputElement = null;
-    componentDidMount(){
-        console.log(this.inputElement);
+
+    componentWillMount() {
+        this.props.fetchAddress(this.props.addressId);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.activeAddress.address) {
@@ -61,11 +62,16 @@ class AddressDetailComponent extends Component {
 
     }
     handleSubmit(data) {
+        console.log(this.inputElement.value);
         return this.props.dispatch(upAddress(this.props.addressId)).payload.update(data).then((snapshot)=>{
             this.props.dispatch(initialize('addressFrom', {}));
             this.context.router.push('/');
-            this.inputElement.value = '';
+
         });
+        // return this.props.dispatch(createAddress()).payload.push(data).then((snapshot)=>{
+        //
+        //     this.props.dispatch(initialize('addressFrom', {}));
+        // });
     }
     handlePlacesChanged(data) {
         let componentForm = {
