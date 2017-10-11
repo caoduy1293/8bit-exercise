@@ -23,7 +23,8 @@ class HeaderComponent extends Component{
                             </button>
                             <Link role="presentation" className={"navbar-brand"} to={appRoute.root}>8Bit_exercise</Link>
                         </div>
-                        <div className={"collapse navbar-collapse"} id="bs-example-navbar-collapse-1"></div>
+                        <div className={"collapse navbar-collapse"} id="bs-example-navbar-collapse-1">
+                        </div>
                     </div>
                 </nav>
         )

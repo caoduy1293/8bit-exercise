@@ -14,17 +14,19 @@ class TableComponent extends Component{
             );
         }else{
             return (
-                <table className={"table"}>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        {this.renderHeaderTable(this.props.tableConfig.headerTable, this.props.tableConfig.operation)}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderBodyTable(this.props.tableConfig.bodyTable, this.props.tableConfig.operation)}
-                    </tbody>
-                </table>
+                <div className={"table-responsive"}>
+                    <table className={"table"}>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            {this.renderHeaderTable(this.props.tableConfig.headerTable, this.props.tableConfig.operation)}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderBodyTable(this.props.tableConfig.bodyTable, this.props.tableConfig.operation)}
+                        </tbody>
+                    </table>
+                </div>
             );
         }
     }
@@ -39,7 +41,7 @@ class TableComponent extends Component{
         }
         return (
             <div styleName='header-table'>
-                <h2>{tableConfig.title}</h2>
+                <h3>{tableConfig.title}</h3>
                 <div styleName='header-button'>
                     <button type="button" className={"btn btn-info"} onClick={() => tableConfig.addCallback()}>
                         Add
