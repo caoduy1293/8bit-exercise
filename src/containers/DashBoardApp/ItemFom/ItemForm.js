@@ -34,7 +34,7 @@ class ItemForm extends React.Component{
     checkDisable = (selectedItem) => {
         return get(selectedItem, FIELDS.title.id, '') === this.props.title
             && get(selectedItem, FIELDS.description.id, '') === this.props.description
-            && this.props.preview;
+            && (!this.props.preview && !this.state.selectedItem);
     };
 
     render() {

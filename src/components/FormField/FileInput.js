@@ -14,7 +14,7 @@ class FormFieldForFileInput extends Component{
         let file = e.target.files[0];
         let valid = true;
         let errMsg = '';
-        if(!isImage(file.name) && !isVideo(file.name) && !!isAudio(file.name)) {
+        if(!isImage(file.name) && !isVideo(file.name) && !isAudio(file.name)) {
             valid = false;
             errMsg = 'Not Image or Video or Audio';
         }
