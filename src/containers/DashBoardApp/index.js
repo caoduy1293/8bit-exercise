@@ -40,7 +40,7 @@ class DashBoardApp extends React.Component {
             title: 'Title',
             dataIndex: 'title',
             key: 'title',
-            width: 200,
+            width: 250,
             render: text => <b>{<EllipsisText text={text} maxLimit={30}/>}</b>,
         },
         {
