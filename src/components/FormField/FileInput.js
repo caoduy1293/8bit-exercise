@@ -47,7 +47,7 @@ class FormFieldForFileInput extends Component{
                 hasFeedback={hasFeedback && (!this.state.isValid || hasError)}
                 help={(!this.state.isValid && this.state.errMsg) || (hasError && meta.error)}
             >
-                <input placeholder={placeholder} type={type} onChange={this.onChange}
+                <input style={{height: 'auto', width: '100%'}} placeholder={placeholder} type={type} onChange={this.onChange}
                        ref={ref => this.fileInput = ref} />
             </FormItem>
         );

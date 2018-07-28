@@ -264,7 +264,7 @@ class DashBoardApp extends React.Component {
                                 <CSVLink data={items} >Export CSV file</CSVLink>
                             </Col>
                         </Row>
-                        <Table pagination={{ pageSize: 5 }}
+                        <Table pagination={{ pageSize: 5 }} scroll={{ x: '300%' }}
                                rowKey="id" columns={this.columns} dataSource={items} />
                         <Modal
                             title={this.state.titleItemForm}

@@ -64,7 +64,7 @@ class ItemForm extends React.Component{
                         {...formItemLayout}
                         label="Preview File"
                     >
-                        <span className="ant-form-text">{selectedItem.previewUrl}</span>
+                        <span style={{width: '100%'}} className="ant-form-text">{selectedItem.previewUrl}</span>
                     </FormItem>) : ''}
 
                     <Field name={FIELDS.preview.id} label={FIELDS.preview.label} type="file"
