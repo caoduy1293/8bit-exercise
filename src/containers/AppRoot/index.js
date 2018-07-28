@@ -40,7 +40,7 @@ const rootRoutes = [
 class App extends React.Component{
     render() {
         return (
-            <Layout style={{ height: "100vh" }}>
+            <Layout style={{ padding: '20px 0', minHeight: '100vh' }}>
                 <Helmet
                     titleTemplate="%s - Demo App"
                     defaultTitle="Demo App"
@@ -57,7 +57,7 @@ class App extends React.Component{
                     timeOut={4000}
                     newestOnTop={true}
                     preventDuplicates
-                    position="top-center"
+                    position="bottom-center"
                     transitionIn="bounceIn"
                     transitionOut="bounceOut"
                     progressBar={false}/>

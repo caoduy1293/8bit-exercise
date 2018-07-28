@@ -40,22 +40,26 @@ class DashBoardApp extends React.Component {
             title: 'Title',
             dataIndex: 'title',
             key: 'title',
+            width: 200,
             render: text => <b>{<EllipsisText text={text} maxLimit={30}/>}</b>,
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
+            width: 350,
             render: text => <p>{<EllipsisText text={text} maxLimit={50}/>}</p>,
         },
         {
             title: 'Date created',
             dataIndex: 'dateCreated',
             key: 'dateCreated',
+            width: 120,
         },
         {
             title: 'Preview',
             key: 'preview',
+            width: 100,
             render: (text, record) => (
                 <span>
                     <Button onClick={() => {this.onPlay(record)}} type="primary" shape="circle" icon="caret-right" />
@@ -65,6 +69,7 @@ class DashBoardApp extends React.Component {
         {
             title: 'Action',
             key: 'action',
+            width: 180,
             render: (text, record) => (
                 <span>
 
@@ -253,9 +258,8 @@ class DashBoardApp extends React.Component {
                     <title>Item Management</title>
                     <meta name="description" content="Item Management"/>
                 </Helmet>
-                <Row>
-                    <Col xs={{ span: 22, offset: 1 }}
-                        className={'dashboard-page'}>
+                <Row className={'dashboard-page'}>
+                    <Col xs={{span: 22, offset: 1}}>
                         <Row className={'header-table'}>
                             <Col span={8}>
                                 <Button className="editable-add-btn" onClick={ ()=> {this.onOpenEditAddForm()}}>Add</Button>
@@ -264,7 +268,7 @@ class DashBoardApp extends React.Component {
                                 <CSVLink data={items} >Export CSV file</CSVLink>
                             </Col>
                         </Row>
-                        <Table pagination={{ pageSize: 5 }} scroll={{ x: '300%' }}
+                        <Table pagination={{ pageSize: 5 }} scroll={{ x: true }}
                                rowKey="id" columns={this.columns} dataSource={items} />
                         <Modal
                             title={this.state.titleItemForm}
@@ -274,7 +278,7 @@ class DashBoardApp extends React.Component {
                             <ItemFormWrapped onAddEditForm={this.submitItem} selectedItem={this.state.selectedItem}
                                              loading={this.state.loading} onGetNasaData={this.onGetNasaData}
                                              nasaData={this.props.nasaData} loadingNasa={this.props.loadingNasa}
-                                            onOffSignal={this.state.visibleFormModel}/>
+                                             onOffSignal={this.state.visibleFormModel}/>
                         </Modal>
                         <Modal
                             title={'Preview'}
@@ -288,7 +292,6 @@ class DashBoardApp extends React.Component {
                                                     height={this.state.mediaType === AUDIO_TYPE ? '70px': 'auto'}
                                                     controls={true} url={this.state.mediaUrl} playing />) }
                             </div>
-
                         </Modal>
                     </Col>
                 </Row>
